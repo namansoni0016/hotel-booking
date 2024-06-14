@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 import userRoutes from "./routes/users";
+import authRoutes from "./routes/auth";
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING as string).then(() => {
     console.log('Database Connected!')
@@ -16,6 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 //Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(3000, () => {
